@@ -19,7 +19,8 @@
                 imgUrl: 'http://t{s}.tianditu.gov.cn/img_c/wmts?tk=', // 影像底图
                 ciaUrl: 'http://t{s}.tianditu.gov.cn/cia_c/wmts?tk=', // 影像注记
                 iboUrl: 'http://t{s}.tianditu.gov.cn/ibo_c/wmts?tk=',//全球境界
-                webKey: '5eaf957b45262af2e319cc061b338432'
+                webKey: '5eaf957b45262af2e319cc061b338432',
+                tileSub:['0', '1', '2', '3', '4', '5', '6', '7']
             }
         },
         mounted() {
@@ -50,7 +51,7 @@
                         tilematrixset: 'c',
                         format: 'tiles',
                         urlTemplate: this.mapUrl + this.webKey,
-                        subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+                        subdomains: this.tileSub
                     }),
                     layers:[
                         new WMTSTileLayer('sign',{
@@ -59,7 +60,7 @@
                             tilematrixset: 'c',
                             format: 'tiles',
                             urlTemplate: this.signUrl + this.webKey,
-                            subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+                            subdomains: this.tileSub
                         }),
                         new WMTSTileLayer('ibo',{
                             tileSystem: [1, -1, -180, 90],
@@ -67,7 +68,7 @@
                             tilematrixset: 'c',
                             format: 'tiles',
                             urlTemplate: this.iboUrl + this.webKey,
-                            subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+                            subdomains: this.tileSub
                         })
                     ]
                 }
