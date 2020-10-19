@@ -51,7 +51,25 @@
                         format: 'tiles',
                         urlTemplate: this.mapUrl + this.webKey,
                         subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
-                    })
+                    }),
+                    layers:[
+                        new WMTSTileLayer('sign',{
+                            tileSystem: [1, -1, -180, 90],
+                            layer: 'cva',
+                            tilematrixset: 'c',
+                            format: 'tiles',
+                            urlTemplate: this.signUrl + this.webKey,
+                            subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+                        }),
+                        new WMTSTileLayer('ibo',{
+                            tileSystem: [1, -1, -180, 90],
+                            layer: 'ibo',
+                            tilematrixset: 'c',
+                            format: 'tiles',
+                            urlTemplate: this.iboUrl + this.webKey,
+                            subdomains: ['0', '1', '2', '3', '4', '5', '6', '7']
+                        })
+                    ]
                 }
                 this.map = new maptalks.Map('map', mapOptions)
             }
