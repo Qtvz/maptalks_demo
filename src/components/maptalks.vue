@@ -28,6 +28,18 @@
         },
         methods: {
             initMap() {
+                const baseOptions = {
+                    layer: 'vec',
+                    urlTemplate: this.mapUrl + this.webKey
+                }
+                const signOptions = {
+                    layer: 'cva',
+                    urlTemplate:this.signUrl + this.webKey
+                }
+                const iboOptions = {
+                    layer: 'ibo',
+                    urlTemplate: this.iboUrl + this.webKey,
+                }
                 const mapOptions = {
                     center: this.center,
                     zoom: this.zoom,
@@ -45,34 +57,23 @@
                         slider: false,
                         zoomLevel: false
                     },
-                    baseLayer: new WMTSTileLayer('base',{
-                        tileSystem: [1, -1, -180, 90],
-                        layer: 'vec',
-                        tilematrixset: 'c',
-                        format: 'tiles',
-                        urlTemplate: this.mapUrl + this.webKey,
-                        subdomains: this.tileSub
-                    }),
+                    baseLayer: this.addWMTSLayer(baseOptions),
                     layers:[
-                        new WMTSTileLayer('sign',{
-                            tileSystem: [1, -1, -180, 90],
-                            layer: 'cva',
-                            tilematrixset: 'c',
-                            format: 'tiles',
-                            urlTemplate: this.signUrl + this.webKey,
-                            subdomains: this.tileSub
-                        }),
-                        new WMTSTileLayer('ibo',{
-                            tileSystem: [1, -1, -180, 90],
-                            layer: 'ibo',
-                            tilematrixset: 'c',
-                            format: 'tiles',
-                            urlTemplate: this.iboUrl + this.webKey,
-                            subdomains: this.tileSub
-                        })
+                        this.addWMTSLayer(signOptions),
+                        this.addWMTSLayer(iboOptions)
                     ]
                 }
                 this.map = new maptalks.Map('map', mapOptions)
+            },
+            addWMTSLayer(options) {
+                return new WMTSTileLayer(options.layer,{
+                    tileSystem: [1, -1, -180, 90],
+                    layer: options.layer,
+                    tilematrixset: 'c',
+                    format: 'tiles',
+                    urlTemplate: options.urlTemplate,
+                    subdomains: this.tileSub
+                })
             }
         }
     }
