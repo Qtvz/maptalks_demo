@@ -33,6 +33,21 @@
                     spatialReference: {
                         projection: 'EPSG:4326'
                     },
+                    scaleControl: {
+                        position: 'bottom-left',
+                        maxWidth: 100,
+                        metric: true,
+                        imperial: false
+                    },
+                    zoomControl: {
+                        position: 'top-right',
+                        slider: false,
+                        zoomLevel: false
+                    },
+                    overviewControl: {
+                        'level ': 5,
+                        size: [130, 80]
+                    },
                     baseLayer: new WMTSTileLayer('base',{
                         tileSystem: [1, -1, -180, 90],
                         layer: 'vec',
