@@ -16,4 +16,7 @@
     width: 100%;
     height: 90vh;
 }
+.container >>> .maptalks-attribution {
+    display: none;
+}
 </style>
